@@ -1,0 +1,30 @@
+server:
+  port: 9092
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bank
+    username: root
+    password: waleed200
+  liquibase:
+    change-log: classpath:/liquibase/liquibase.xml
+    enabled: true
+    drop-first: off
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  resources:
+    docs:
+      path: /v3/api-docs

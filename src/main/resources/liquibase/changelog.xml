@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="create-account-table" author="Waleed Sawalhi">
+        <createTable tableName="customer">
+            <column name="id" type="VARCHAR(100)">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="customer_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="balance" type="INT">
+                <constraints checkConstraint="balance > 0"/>
+            </column>
+
+            <column name="status" type="VARCHAR(100)">
+                <constraints nullable="false" checkConstraint="status in ('INACTIVE', 'ACTIVE')"/>
+            </column>
+
+            <column name="type" type="VARCHAR(100)">
+                <constraints checkConstraint="type in ('SALARY', 'SAVING', 'INVESTMENT')"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="account"
+                                 baseColumnNames="customer_id"
+                                 constraintName="FK_ACCOUNT_CONSTRAINT"
+                                 referencedTableName="customer"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

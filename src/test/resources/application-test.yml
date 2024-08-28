@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: test
+  web:
+    content-negotiation:
+      default-content-type: application/json
+      media-types:
+        json: application/json
+        xml: application/xml

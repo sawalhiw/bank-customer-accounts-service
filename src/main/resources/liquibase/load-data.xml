@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="insert-admin-user-address-data" author="Waleed Sawalhi">
+        <loadUpdateData tableName="address" primaryKey="id" file="classpath:/liquibase/default-user-address.csv">
+            <column header="id" name="id" type="VARCHAR(100)"/>
+            <column header="country" name="country" type="VARCHAR(244)"/>
+            <column header="state" name="state" type="VARCHAR(30)"/>
+            <column header="street" name="street" type="VARCHAR(30)"/>
+        </loadUpdateData>
+    </changeSet>
+    <changeSet id="insert-admin-user-data" author="Waleed Sawalhi">
+        <loadUpdateData tableName="customer" primaryKey="id" file="classpath:/liquibase/default-user.csv">
+            <column header="id" name="id" type="VARCHAR(100)"/>
+            <column header="gender" name="gender" type="VARCHAR(100)"/>
+            <column header="type" name="type" type="VARCHAR(100)"/>
+            <column header="addressId" name="address_id" type="VARCHAR(30)"/>
+            <column header="name" name="name" type="VARCHAR(100)"/>
+            <column header="email" name="email" type="VARCHAR(100)"/>
+            <column header="phoneNumber" name="phone_number" type="VARCHAR(100)"/>
+            <column header="dateOfBirth" name="date_of_birth" type="VARCHAR(100)"/>
+            <column header="associatedLegalId" name="associated_legal_id" type="VARCHAR(100)"/>
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

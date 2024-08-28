@@ -1,0 +1,2 @@
+id, gender,type,addressId,name,email,phoneNumber,dateOfBirth,associatedLegalId
+admin,male,CORPORATE,admin,admin,admin@gmail.com,+962796058883,2000-08-03,1234567
