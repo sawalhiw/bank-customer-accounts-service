@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 public class AccountDto extends BaseDto {
     @NotNull(message = "Account shouldn't be null.")
     private AccountStatus status;
-    @Min(value = 1)
+    @Min(value = 1, message = "Balance should be greater than 0.")
     private Integer balance;
     @NotBlank(message = "CustomerId shouldn't be null or empty.")
     private String customerId;
