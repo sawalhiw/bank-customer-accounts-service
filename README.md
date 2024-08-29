@@ -48,11 +48,11 @@ To run this service, you need the following:
 
 To run the `bank-customer-accounts-service`, follow these steps:
 
-1. **Set Up MySQL Database:**
-   - Create a MySQL database. You can name it `bank` or choose another name if preferred.
+1.**Set Up MySQL Database:**
+   - Create a MySQL database. You can name it `bank`.
 
 2. **Configure Database Access:**
-   - Update your application configuration to match your MySQL setup. This typically involves setting the username and password in the `application.properties` or `application.yml` file.
+   - Update your application configuration to match your MySQL setup. This typically involves setting the username and password in the `application.yml` file.
 
 3. **(Optional) Configure Kafka:**
    - If you need to customize Kafka settings, update the configuration in `KafkaProducerConfig.java`. Adjust properties like `bootstrap.servers`, `key.serializer`, `value.serializer`, etc., according to your Kafka setup.
