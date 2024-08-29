@@ -4,6 +4,7 @@ import bank.dto.BaseDto;
 import bank.dto.FeatureInfoDto;
 import bank.entity.BaseEntity;
 import bank.exception.NotFoundException;
+import bank.exception.ValidationException;
 import bank.mapper.BaseMapper;
 import bank.repository.BaseRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,9 @@ public abstract class BaseServiceImpl<ENTITY extends BaseEntity, DTO extends Bas
     public DTO create(final DTO dto) {
         logger.info("Validating {}:  {}",featureInfo().getSingle(), dto);
         validate(dto);
+        if (repository.existsById(dto.getId())) {
+            throw new ValidationException(String.format("%s already exists", featureInfo().getSingle()));
+        }
         ENTITY entity = mapper.toEntity(dto);
         DTO result = mapper.toDto(repository.save(entity));
         logger.info("Created {} with ID: {}", featureInfo().getSingle(), dto.getId());
