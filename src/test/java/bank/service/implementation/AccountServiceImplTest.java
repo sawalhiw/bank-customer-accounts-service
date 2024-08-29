@@ -2,11 +2,13 @@ package bank.service.implementation;
 
 
 import bank.dto.AccountDto;
+import bank.dto.AccountType;
 import bank.dto.CustomerDto;
 import bank.entity.Account;
 import bank.exception.NotFoundException;
 import bank.exception.ValidationException;
 import bank.feign.BankCustomerClient;
+import bank.kafka.EmailNotificationKafkaProducer;
 import bank.mapper.AccountMapper;
 import bank.repository.AccountRepository;
 import bank.service.BaseServiceTest;
@@ -30,10 +32,12 @@ public class AccountServiceImplTest extends BaseServiceTest<Account, AccountDto>
     private AccountRepository repository;
     @Mock
     private BankCustomerClient client;
+    @Mock
+    private EmailNotificationKafkaProducer producer;
 
     @Before
     public void setup() {
-        setup(mapper, repository, new AccountServiceImpl(repository, mapper, client));
+        setup(mapper, repository, new AccountServiceImpl(repository, mapper, client, producer));
         when(client.getCustomer(any())).thenReturn(createCustomer());
     }
 
@@ -43,6 +47,7 @@ public class AccountServiceImplTest extends BaseServiceTest<Account, AccountDto>
                 .builder()
                 .id("1234567899")
                 .customerId("1234567")
+                .type(AccountType.SALARY)
                 .build();
     }
 
@@ -52,6 +57,7 @@ public class AccountServiceImplTest extends BaseServiceTest<Account, AccountDto>
                 .builder()
                 .id("1234567899")
                 .customerId("1234567")
+                .type(AccountType.SALARY)
                 .build();
     }
 
@@ -104,9 +110,9 @@ public class AccountServiceImplTest extends BaseServiceTest<Account, AccountDto>
 
     @Test(expected = ValidationException.class)
     public void testUpdateByIdShouldFailBecauseCustomerHasSalaryAccount() {
-        when(repository.existsById(any())).thenReturn(true);
+        when(repository.existsById(any())).thenReturn(false);
         when(repository.existsAccountByCustomerIdAndType(any(), any())).thenReturn(true);
-        super.testUpdate();
+        super.testCreate();
     }
 
     private CustomerDto createCustomer() {
