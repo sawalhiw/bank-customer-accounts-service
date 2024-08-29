@@ -76,3 +76,5 @@ To run the `bank-customer-accounts-service`, follow these steps:
     username: your_database_username
     password: your_database_password
   ```
+### Important Notes
+1. **If you perform any write operation on this service you will receive an email so please make sure check spam tab in your email.**
