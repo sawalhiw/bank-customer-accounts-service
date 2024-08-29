@@ -37,7 +37,7 @@ To run this service, you need the following:
 **Note:** Ensure to start the services in the following order:
 
 1. **`bank-customer-service`**:
-   - Start this service first. It is responsible for validating customer details.
+   - Start this service first. It is responsible for validating customer details. it's core component.
 
 2. **`bank-auth-service`**:
    - Start this service second. It handles token validation and security.
