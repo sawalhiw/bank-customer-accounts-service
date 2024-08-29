@@ -72,6 +72,7 @@ public class AccountServiceImplTest extends BaseServiceTest<Account, AccountDto>
         super.testUpdate();
     }
 
+    @Test
     public void testUpdateByIdShouldSuccess() {
         when(repository.existsById(any())).thenReturn(true);
         super.testUpdate();
