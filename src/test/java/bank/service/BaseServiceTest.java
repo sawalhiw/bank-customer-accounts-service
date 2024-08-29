@@ -56,7 +56,7 @@ public abstract class BaseServiceTest<ENTITY extends BaseEntity, DTO extends Bas
         when(repository.findById(any(String.class))).thenReturn(Optional.of(entity));
         when(mapper.toDto(any())).thenReturn(createDto());
 
-        DTO result = service.findById("1");
+        DTO result = service.findById(createEntity().getId());
 
         assertNotNull(result);
     }
@@ -65,7 +65,7 @@ public abstract class BaseServiceTest<ENTITY extends BaseEntity, DTO extends Bas
         ENTITY entity = createEntity();
         when(mapper.toDto(any())).thenReturn(createDto());
 
-        DTO result = service.findById("1");
+        DTO result = service.findById(createEntity().getId());
 
         assertNotNull(result);
     }
@@ -89,7 +89,7 @@ public abstract class BaseServiceTest<ENTITY extends BaseEntity, DTO extends Bas
         when(repository.save(any())).thenReturn(entity);
         when(mapper.toDto(any())).thenReturn(dto);
 
-        DTO result = service.updateById(dto, "1");
+        DTO result = service.updateById(dto, createEntity().getId());
 
         assertNotNull(result);
     }
@@ -99,9 +99,9 @@ public abstract class BaseServiceTest<ENTITY extends BaseEntity, DTO extends Bas
         when(repository.findById(any(String.class))).thenReturn(Optional.of(entity));
         when(mapper.toDto(any())).thenReturn(createDto());
 
-        DTO result = service.deleteById("1");
+        DTO result = service.deleteById(createEntity().getId());
 
         assertNotNull(result);
-        Mockito.verify(repository).deleteById("1");
+        Mockito.verify(repository).deleteById(createEntity().getId());
     }
 }

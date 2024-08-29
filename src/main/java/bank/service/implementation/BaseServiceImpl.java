@@ -22,6 +22,8 @@ public abstract class BaseServiceImpl<ENTITY extends BaseEntity, DTO extends Bas
 
     protected abstract FeatureInfoDto featureInfo();
 
+    protected abstract void validate(DTO dto);
+
     public Page<DTO> findAll(final Pageable pageable) {
         logger.debug("Finding all {} with pageable: {}", featureInfo().getPlural(), pageable);
         Page<DTO> result = mapper.buildDtoPage(repository.findAll(pageable));
@@ -43,6 +45,8 @@ public abstract class BaseServiceImpl<ENTITY extends BaseEntity, DTO extends Bas
     }
 
     public DTO create(final DTO dto) {
+        logger.info("Validating {}:  {}",featureInfo().getSingle(), dto);
+        validate(dto);
         ENTITY entity = mapper.toEntity(dto);
         DTO result = mapper.toDto(repository.save(entity));
         logger.info("Created {} with ID: {}", featureInfo().getSingle(), dto.getId());
@@ -51,6 +55,8 @@ public abstract class BaseServiceImpl<ENTITY extends BaseEntity, DTO extends Bas
 
     public DTO updateById(final DTO dto, final String id) {
         validateIfEntityExists(id);
+        logger.info("Validating {}: {}", featureInfo().getSingle(), dto);
+        validate(dto);
         dto.setId(id);
         ENTITY entity = mapper.toEntity(dto);
         DTO result = mapper.toDto(repository.save(entity));
